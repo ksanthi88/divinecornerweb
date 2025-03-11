@@ -31,26 +31,7 @@ public class UserController {
         return "redirect:/users/login"; // Redirect to login after successful registration
     }
 
-//    @PostMapping("/register")
-//    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
-//        System.out.println("📩 Received Registration Request: " + user);
-//
-//        if (result.hasErrors()) {
-//            model.addAttribute("errorMessage", "Validation failed! Please check the inputs.");
-//            return "register"; // Show registration form again with errors
-//        }
-//
-//        try {
-//            userService.registerUser(user);
-//            System.out.println("✅ User registered successfully: " + user);
-//        } catch (RuntimeException e) {
-//            System.err.println("❌ Registration error: " + e.getMessage());
-//            model.addAttribute("errorMessage", e.getMessage());
-//            return "register";
-//        }
-//
-//        return "redirect:/users/login"; // ✅ Ensure this matches the Thymeleaf login page
-//    }
+
     // Show Login Form
     @GetMapping("/login")
     public String showLoginForm() {

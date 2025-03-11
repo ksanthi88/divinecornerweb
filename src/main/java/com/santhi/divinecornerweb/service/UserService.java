@@ -42,7 +42,7 @@ public class UserService {
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
-  //  Fetch all users (NEW method)
+  //  Fetch all users
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }

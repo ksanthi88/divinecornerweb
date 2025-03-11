@@ -67,6 +67,8 @@
             <td th:text="${product.category}"></td>
             <td>₹<span th:text="${product.price}"></span></td>
             <td>
+                <!-- Edit Product Button -->
+                <a th:href="@{/admin/products/edit/{id}(id=${product.id})}" class="edit-btn">Edit</a>
                 <!-- Delete Button - Visible only to Admin Users -->
                 <form th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
                       th:action="@{/admin/products/delete/{id}(id=${product.id})}" method="post"
