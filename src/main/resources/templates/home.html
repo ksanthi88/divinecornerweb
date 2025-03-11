@@ -1,10 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divine Corner - Home</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
+
 <body>
-$END$
+<header>
+    <nav>
+        <div class="logo">
+            <img th:src="@{/images/image.jpg}" alt="Logo" class="logo-icon"> Divine Corner
+        </div>
+        <ul class="nav-links">
+            <li><a th:href="@{/home}">HOME</a></li>
+            <li><a th:href="@{/products}">PRODUCTS</a></li>
+            <li><a th:href="@{/about}">ABOUT</a></li>
+            <li><a th:href="@{/contact}">CONTACT US</a></li>
+            <li th:if="${#authorization.expression('isAnonymous()')}">
+                <a th:href="@{/users/login}">SIGN IN</a>
+            </li>
+            <li th:if="${#authorization.expression('isAuthenticated()')}">
+                <a th:href="@{/logout}" onclick="logoutAndRedirect(event)">SIGN OUT</a>
+            </li>
+            <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                <a th:href="@{/admin/dashboard}">ADMIN</a>
+            </li>
+            <li><a th:href="@{/cart}" id="cart-btn">CART 🛒 (<span id="cartCount" th:text="${cartCount}">0</span>)</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Hero Section with Typewriter Effect -->
+<section class="hero" id="home">
+    <h1>Welcome to <span class="typewriter">Divine Corner</span></h1>
+    <h3 style="color: black">Divine Custom Temples</h3>
+    <p>Created by you, Hand Made by us</p>
+    <a th:href="@{/products}" class="btn">Shop Now</a>
+</section>
+
+<!-- Product Showcase with Lightbox Effect -->
+<section id="products" class="products">
+    <h2>Photo Gallery</h2>
+    <div class="product-grid">
+        <div class="product" onclick="openLightbox('/images/pic1.jpg')">
+            <img th:src="@{/images/pic1.jpg}" alt="Mandir 1">
+        </div>
+        <div class="product" onclick="openLightbox('/images/product1.jpg')">
+            <img th:src="@{/images/product1.jpg}" alt="Mandir 2">
+        </div>
+        <div class="product" onclick="openLightbox('/images/product2.jpg')">
+            <img th:src="@{/images/product2.jpg}" alt="Mandir 3">
+        </div>
+        <div class="product" onclick="openLightbox('/images/product3.jpg')">
+            <img th:src="@{/images/product3.jpg}" alt="Mandir 4">
+        </div>
+        <div class="product" onclick="openLightbox('/images/product4.jpg')">
+            <img th:src="@{/images/product4.jpg}" alt="Mandir 5">
+        </div>
+        <div class="product" onclick="openLightbox('/images/product5.jpg')">
+            <img th:src="@{/images/product5.jpg}" alt="Mandir 6">
+        </div>
+        <div class="product" onclick="openLightbox('/images/product6.jpg')">
+            <img th:src="@{/images/product6.jpg}" alt="Mandir 7">
+        </div>
+        <div class="product" onclick="openLightbox('/images/product7.jpg')">
+            <img th:src="@{/images/product7.jpg}" alt="Mandir 8">
+        </div>
+    </div>
+</section>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Product Image">
+</div>
+
+<footer class="footer">
+    <p>&copy; 2025 Divine Corner. All rights reserved.</p>
+</footer>
+<script th:src="@{/js/home.js}" defer></script>
+<script>
+    function logoutAndRedirect(event) {
+        event.preventDefault(); // Prevent immediate navigation
+        fetch('/logout', { method: 'POST' }) // Spring Security handles POST logout
+            .then(() => window.location.href = "/users/login"); // Redirect to home
+    }
+</script>
+<script>
+    function updateCartCount() {
+        fetch('/api/cart/count')
+            .then(response => response.json())
+            .then(count => {
+                document.getElementById('cartCount').innerText = count;
+            })
+            .catch(error => console.error('Error fetching cart count:', error));
+    }
+
+    // Update cart count every 3 seconds
+    setInterval(updateCartCount, 3000);
+
+    // Update cart count when the page loads
+    document.addEventListener("DOMContentLoaded", updateCartCount);
+</script>
 </body>
 </html>

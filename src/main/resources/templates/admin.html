@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
 </head>
 <body>
-$END$
+
+<header>
+    <nav>
+        <ul>
+            <li><a th:href="@{/admin/products}">Manage Products</a></li>
+            <li><a th:href="@{/admin/users}">Manage Users</a></li>
+            <li><a th:href="@{/logout}" onclick="logoutAndRedirect(event)">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Admin Dashboard</h1>
+    <p>Welcome, Admin!</p>
+
+    <div>
+        <h2>Product Management</h2>
+        <a th:href="@{/admin/products/add}" class="button">Add Product</a>
+        <a th:href="@{/admin/products}" class="button">View All Products</a>
+    </div>
+
+    <div>
+        <h2>User Management</h2>
+        <a th:href="@{/admin/users}" class="button">View Users</a>
+    </div>
+</main>
+
 </body>
 </html>

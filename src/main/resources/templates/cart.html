@@ -1,10 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - Divine Corner</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/cart.css}">
 </head>
 <body>
-$END$
+
+<header>
+    <nav>
+        <div class="logo">
+            <img th:src="@{/images/image.jpg}" alt="Logo" class="logo-icon"> Divine Corner
+        </div>
+        <ul class="nav-links">
+            <li><a th:href="@{/home}">HOME</a></li>
+            <li><a th:href="@{/products}">PRODUCTS</a></li>
+            <li><a th:href="@{/about}">ABOUT</a></li>
+            <li><a th:href="@{/contact}">CONTACT US</a></li>
+            <li th:if="${#authorization.expression('isAnonymous()')}">
+                <a th:href="@{/users/login}">SIGN IN</a>
+            </li>
+            <li th:if="${#authorization.expression('isAuthenticated()')}">
+                <a th:href="@{/logout}" onclick="logoutAndRedirect(event)">SIGN OUT</a>
+            </li>
+            <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                <a th:href="@{/admin/dashboard}">ADMIN</a>
+            </li>
+            <li><a th:href="@{/cart}" id="cart-btn">CART 🛒 (<span id="cart-count">0</span>)</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+    <h2>Your Shopping Cart</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>TotalPrice</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry : ${cartProducts}">
+            <td>
+                <img th:src="@{/images/{img}(img=${entry.key.imageName})}" alt="Product Image" width="50">
+            </td>
+            <td th:text="${entry.key.name}"></td>
+            <td>₹<span th:text="${entry.key.price}"></span></td>
+            <td th:text="${entry.value}"></td> <!-- Quantity -->
+            <td>₹<span th:text="${entry.key.price * entry.value}"></span></td>
+            <td>
+                <form th:action="@{/cart/remove/{id}(id=${entry.key.id})}" method="post">
+                    <button type="submit">Remove</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="cart-actions">
+        <form th:action="@{/cart/clear}" method="post">
+            <button type="submit">Clear Cart</button>
+        </form>
+        <a th:href="@{/checkout}" class="checkout-btn">Proceed to Checkout</a>
+    </div>
+
+    <p th:if="${cartProducts == null or cartProducts.isEmpty()}">Your cart is empty.</p></div>
+
+<script th:src="@{/js/cart.js}"></script>
+<script>
+    function logoutAndRedirect(event) {
+        event.preventDefault(); // Prevent immediate navigation
+        fetch('/logout', { method: 'POST' }) // Spring Security handles POST logout
+            .then(() => window.location.href = "/users/login"); // Redirect to home
+    }
+</script>
 </body>
 </html>

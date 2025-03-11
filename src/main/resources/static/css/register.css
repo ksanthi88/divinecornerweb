@@ -1,0 +1,83 @@
+.register-container {
+    width: 50%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+/* Container to hold both login form and image */
+.container {
+    display: flex;
+    width: 60%;
+    max-width: 900px;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    justify-content:center;
+    align-items: center;
+    gap: 20px; /
+
+}
+.register-container h2 {
+    margin-bottom: 20px;
+}
+
+.register-container form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+.register-container input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+}
+
+.register-container button {
+    width: 80%;
+    padding: 10px;
+    background-color: #e57a33;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.register-container button:hover {
+    background-color: #e65c00;
+}
+
+header {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.image-container {
+    width: 50%;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* General Styles */
+body {/*
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #E5CCBF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Make it take the full height of the screen */
+}

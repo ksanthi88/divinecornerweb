@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${pageTitle} ?: 'Divine Corner'"></title>
+  <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
 <body>
-$END$
+
+<header th:fragment="site-header">
+  <nav>
+    <div class="logo">
+      <img th:src="@{/images/image.jpg}" alt="Logo" class="logo-icon"> Divine Corner
+    </div>
+    <ul class="nav-links">
+      <li><a th:href="@{/home}">HOME</a></li>
+      <li><a th:href="@{/products}">PRODUCTS</a></li>
+      <li><a th:href="@{/about}">ABOUT</a></li>
+      <li><a th:href="@{/contact}">CONTACT US</a></li>
+
+      <li th:if="${#authorization.expression('isAnonymous()')}">
+        <a th:href="@{/users/login}">SIGN IN</a>
+      </li>
+
+      <li th:if="${#authorization.expression('isAuthenticated()')}">
+        <a th:href="@{/logout}" onclick="logoutAndRedirect(event)">SIGN OUT</a>
+      </li>
+
+      <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+        <a th:href="@{/admin/dashboard}">ADMIN</a>
+      </li>
+
+      <li><a th:href="@{/cart}" id="cart-btn">CART 🛒 (<span id="cartCount" th:text="${cartCount}">0</span>)</a></li>
+    </ul>
+  </nav>
+</header>
+
 </body>
 </html>

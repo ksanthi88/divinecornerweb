@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/register.css}">
 </head>
 <body>
-$END$
+<header>
+    <nav>
+        <div class="logo">
+            <img th:src="@{/images/image.jpg}" alt="Logo" class="logo-icon"> Divine Corner
+        </div>
+        <ul class="nav-links">
+            <li><a th:href="@{/}">HOME</a></li>
+            <li><a th:href="@{/products}">PRODUCTS</a></li>
+            <li><a th:href="@{/about}">ABOUT</a></li>
+            <li><a th:href="@{/contact}">CONTACT US</a></li>
+            <li><a th:href="@{/users/login}">SIGN IN</a></li>
+            <li><a th:href="@{/cart}" id="cart-btn">CART 🛒 (<span id="cart-count">0</span>)</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="register-container">
+        <h2>Please Register Here</h2>
+        <form id="sign-up" th:action="@{/users/register}" method="post" th:object="${user}">
+            <input type="text" id="fullName" th:field="*{fullName}" placeholder="Full Name" required>
+            <input type="email" id="email" th:field="*{email}" placeholder="Enter Email" required>
+            <input type="text" id="phoneNumber" th:field="*{phoneNumber}" placeholder="Enter Phone Number" required>
+            <input type="password" id="password" th:field="*{password}" placeholder="New Password" required>
+            <button type="submit">Submit</button>
+        </form>
+        <p><a th:href="@{/home}">Back to Home</a></p>
+    </div>
+    <!-- Right Side: Image -->
+    <div class="image-container">
+        <img th:src="@{/images/back4.jpg}" alt="Register Image">
+    </div>
+</div>
+<script defer th:src="@{/js/header.js}"></script>
+<script defer th:src="@{/js/register.js}"></script>
 </body>
 </html>
