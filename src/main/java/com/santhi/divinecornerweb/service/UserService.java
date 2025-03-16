@@ -27,10 +27,8 @@ public class UserService {
             throw new RuntimeException("Email already in use!");
         }
 
-        // Encrypt password before saving
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        // Assign default role if null
         if (user.getRole() == null) {
             user.setRole(Role.USER);
         }
@@ -38,11 +36,10 @@ public class UserService {
         userRepository.save(user);
     }
 
-    // Find user by email
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
-  //  Fetch all users
+
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }

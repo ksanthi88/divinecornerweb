@@ -24,6 +24,6 @@ public class ProductController {
     public String showProductsPage(Model model) {
         List<Product> products = productService.getAllProducts();
         model.addAttribute("products", products);
-        return "products"; // ✅ This should match the Thymeleaf template name
+        return "products";
     }
 }

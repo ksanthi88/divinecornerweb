@@ -73,7 +73,7 @@ public class CartController {
         return "cart";
     }
 
-    // Add a product to the cart (Thymeleaf action)
+    // Add a product to the cart
     @PostMapping("/add/{productId}")
     public String addToCart(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long productId) {
         if (userDetails != null) {
@@ -82,7 +82,7 @@ public class CartController {
         return "redirect:/cart"; // Redirects back to cart page
     }
 
-    // Remove a product from the cart (Thymeleaf action)
+    // Remove a product from the cart
     @PostMapping("/remove/{productId}")
     public String removeFromCart(@AuthenticationPrincipal UserDetails userDetails, @PathVariable Long productId) {
         if (userDetails != null) {
@@ -91,7 +91,7 @@ public class CartController {
         return "redirect:/cart"; // Redirects back to cart page
     }
 
-    // Clear the cart (Thymeleaf action)
+    // Clear the cart
     @PostMapping("/clear")
     public String clearCart(@AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails != null) {

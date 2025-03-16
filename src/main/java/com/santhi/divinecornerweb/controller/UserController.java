@@ -22,13 +22,13 @@ public class UserController {
     // Show Registration Form
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new User()); // ✅ Ensure a User object is passed
-        return "register"; // ✅ Ensure this matches the correct Thymeleaf file name
+        model.addAttribute("user", new User());
+        return "register";
     }
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("user") User user, Model model) {
-        userService.registerUser(user); // Save user in DB
-        return "redirect:/users/login"; // Redirect to login after successful registration
+        userService.registerUser(user);
+        return "redirect:/users/login";
     }
 
 

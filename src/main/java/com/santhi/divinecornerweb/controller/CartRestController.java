@@ -62,7 +62,7 @@ public class CartRestController {
     @GetMapping("/count")
     public ResponseEntity<Integer> getCartCount(@AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails == null) {
-            return ResponseEntity.ok(0); // Return 0 if not logged in
+            return ResponseEntity.ok(0);
         }
         int count = cartService.getCartItemCount(userDetails.getUsername());
         return ResponseEntity.ok(count);

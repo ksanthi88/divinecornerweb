@@ -21,13 +21,13 @@ public class ProductViewController {
         this.productService = productService;
     }
 
-    // ✅ Get all products
+    //  Get all products
     @GetMapping
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
 
-    // ✅ Get product by ID
+    // Get product by ID
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         return productService.getProductById(id)
