@@ -17,7 +17,6 @@ import java.util.concurrent.atomic.AtomicReference;
 public class SecurityConfig {
     private final UserRepository userRepository;
 
-    // ✅ Inject UserRepository into SecurityConfig
     public SecurityConfig(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -53,10 +52,10 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/home")
                         .permitAll()
                 )
-                .csrf(csrf -> csrf.disable()); // ✅ TEMPORARILY DISABLE CSRF
+                .csrf(csrf -> csrf.disable());
         return http.build();
     }
-    // ✅ Fix: Injecting `userRepository` properly into the lambda function
+
     @Bean
     public UserDetailsService userDetailsService() {
         return email -> {
@@ -65,9 +64,9 @@ public class SecurityConfig {
             if(user == null ) { throw new UsernameNotFoundException("User not found: " + email);}
 
             return org.springframework.security.core.userdetails.User
-                    .withUsername(user.getEmail()) // ✅ Ensure correct field is used
-                    .password(user.getPassword()) // ✅ Ensure password is already hashed
-                    .roles(user.getRole().toString()) // ✅ Convert role to Spring Security format
+                    .withUsername(user.getEmail())
+                    .password(user.getPassword())
+                    .roles(user.getRole().toString())
                     .build();
         };
     }

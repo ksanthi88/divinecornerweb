@@ -40,7 +40,6 @@ public class CartController {
         return 0;
     }
 
-    // Show cart page (Thymeleaf View)
     @GetMapping
     public String viewCart(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         if (userDetails == null) {
@@ -79,7 +78,7 @@ public class CartController {
         if (userDetails != null) {
             cartService.addToCart(userDetails.getUsername(), productId);
         }
-        return "redirect:/cart"; // Redirects back to cart page
+        return "redirect:/cart";
     }
 
     // Remove a product from the cart
@@ -88,7 +87,7 @@ public class CartController {
         if (userDetails != null) {
             cartService.removeFromCart(userDetails.getUsername(), productId);
         }
-        return "redirect:/cart"; // Redirects back to cart page
+        return "redirect:/cart";
     }
 
     // Clear the cart
@@ -97,7 +96,7 @@ public class CartController {
         if (userDetails != null) {
             cartService.clearCart(userDetails.getUsername());
         }
-        return "redirect:/cart"; // Redirects back to cart page
+        return "redirect:/cart";
     }
 
 

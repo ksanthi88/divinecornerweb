@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     updateCartCount();
 });
 
-// ✅ Function to update the cart count dynamically
+// update the cart count dynamically
 function updateCartCount() {
     fetch("/api/cart/items")
         .then(response => response.json())
@@ -12,7 +12,7 @@ function updateCartCount() {
         .catch(error => console.error("Error fetching cart count:", error));
 }
 
-// ✅ Function to add a product to the cart
+// Add a product to the cart
 function addToCart(productId) {
     fetch(`/api/cart/add/${productId}`, {
         method: "POST"
@@ -25,7 +25,7 @@ function addToCart(productId) {
         .catch(error => console.error("Error adding product to cart:", error));
 }
 
-// ✅ Function to remove a product from the cart
+// Remove a product from cart
 function removeFromCart(productId) {
     fetch(`/api/cart/remove/${productId}`, {
         method: "POST"
@@ -38,7 +38,7 @@ function removeFromCart(productId) {
         .catch(error => console.error("Error removing product from cart:", error));
 }
 
-// ✅ Function to clear the cart
+// TODO Clear the cart
 function clearCart() {
     fetch("/api/cart/clear", {
         method: "POST"
@@ -51,7 +51,7 @@ function clearCart() {
         .catch(error => console.error("Error clearing cart:", error));
 }
 
-// ✅ Attach event listeners dynamically (if cart buttons exist)
+// Attach event listeners dynamically (if cart buttons exist)
 document.querySelectorAll(".add-to-cart-btn").forEach(button => {
     button.addEventListener("click", function () {
         const productId = this.getAttribute("data-product-id");

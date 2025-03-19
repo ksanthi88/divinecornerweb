@@ -76,9 +76,9 @@
 <script th:src="@{/js/cart.js}"></script>
 <script>
     function logoutAndRedirect(event) {
-        event.preventDefault(); // Prevent immediate navigation
-        fetch('/logout', { method: 'POST' }) // Spring Security handles POST logout
-            .then(() => window.location.href = "/users/login"); // Redirect to home
+        event.preventDefault();
+        fetch('/logout', { method: 'POST' })
+            .then(() => window.location.href = "/users/login");
     }
 </script>
 </body>

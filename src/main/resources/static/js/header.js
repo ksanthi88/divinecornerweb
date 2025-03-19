@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-// Function to update cart count
+// Update cart count
 function updateCartCount() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     document.getElementById("cart-count").textContent = cart.reduce((total, item) => total + item.quantity, 0);

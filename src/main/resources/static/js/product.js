@@ -42,7 +42,7 @@ async function loadProducts() {
     }
 }
 
-// ✅ Search & Filter Function
+// Search & Filter Function
 function filterProducts() {
     const query = document.getElementById("search-box").value.toLowerCase();
     productBody.innerHTML = "";
@@ -91,7 +91,7 @@ function addToCart(id) {
         .catch(error => console.error("Error adding to cart:", error));
 }
 
-// ✅ Update Cart Count
+// Update Cart Count
 function updateCartCount() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let cartCount = cart.reduce((total, item) => total + item.quantity, 0);
@@ -101,7 +101,7 @@ function updateCartCount() {
     }
 }
 
-// ✅ Load products on page load
+//Load products on page load
 document.addEventListener("DOMContentLoaded", () => {
     loadProducts();
     updateCartCount();

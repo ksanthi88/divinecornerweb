@@ -6,10 +6,8 @@ document.getElementById("sign-up").addEventListener("submit", async function(eve
     const phoneNumber = document.getElementById("phoneNumber").value.trim();
     const password = document.getElementById("password").value.trim();
 
-    // ✅ Debugging: Log values before sending to API
     console.log("Captured Values:", { fullName, email, phoneNumber, password });
 
-    // ✅ Check for missing inputs
     if (!fullName || !email || !phoneNumber || !password) {
         alert("⚠️ All fields are required!");
         return;
@@ -23,7 +21,7 @@ document.getElementById("sign-up").addEventListener("submit", async function(eve
 
     if (response.ok) {
         alert("Registration successful! Please login.");
-        window.location.href = "/users/login"; // ✅ Redirect to Thymeleaf Login
+        window.location.href = "/users/login"; // Redirect to Thymeleaf Login
     } else {
         alert("Registration failed!");
     }

@@ -59,6 +59,7 @@ public class CartRestController {
         return ResponseEntity.ok("Cart cleared successfully.");
     }
 
+    // Get the cart count
     @GetMapping("/count")
     public ResponseEntity<Integer> getCartCount(@AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails == null) {

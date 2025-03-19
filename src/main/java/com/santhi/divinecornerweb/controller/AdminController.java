@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin")
-@PreAuthorize("hasRole('ADMIN')") // Restrict access to ADMIN only
+@PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
     private final ProductService productService;
     private final UserService userService;
@@ -31,37 +31,37 @@ public class AdminController {
 
     @GetMapping("/dashboard")
     public String adminDashboard() {
-        return "admin"; // Admin page
+        return "admin";
     }
 
     @GetMapping("/products")
     public String manageProducts(Model model) {
         model.addAttribute("products", productService.getAllProducts());
-        return "products"; // Page to view and manage products
+        return "products";
     }
 
     @GetMapping("/products/add")
     public String showAddProductForm(Model model) {
         model.addAttribute("product", new Product());
-        return "product-form"; // Page to add a new product
+        return "product-form";
     }
 
     @GetMapping("/users")
     public String manageUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
-        return "user-list"; // Page to view and manage users
+        return "user-list";
     }
     @PostMapping("/products/save")
     public String saveProduct(@ModelAttribute Product product,
                               @RequestParam("imageFile") MultipartFile file) {
         if (!file.isEmpty()) {
             try {
-                // Save image in `static/images/`
+
                 String fileName = file.getOriginalFilename();
                 Path filePath = Paths.get("src/main/resources/static/images", fileName);
                 Files.write(filePath, file.getBytes());
 
-                // Store the filename in the database
+
                 product.setImageName(fileName);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -81,7 +81,7 @@ public class AdminController {
         productService.updateProduct(id, product);
         return "redirect:/products";
     }
-    @GetMapping("/products/edit/{id}")
+    @PostMapping("/products/edit/{id}")
     public String showEditProductForm(@PathVariable Long id, Model model) {
         Product product = productService.getProductById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
